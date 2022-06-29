@@ -1,6 +1,8 @@
 # Author: Ed Reason, 2022
 
 import shutil
+import sys
+from PyQt5.QtWidgets import QApplication, QWidget, QLabel
 import os
 import time
 import glob
@@ -8,7 +10,6 @@ from PIL import Image
 
 
 # class TestSetup:
-
 
 
 # Define file paths
@@ -53,6 +54,22 @@ def test_setup(src_path, target_file):
     time.sleep(2)
 
 
+def pyqt5app():
+    app = QApplication(sys.argv)
+    w = QWidget()
+    b = QLabel(w)
+    b.setText("Hello World!")
+    w.setGeometry(500, 500, 1000, 500)
+    b.move(450, 240)
+    w.setWindowTitle("PyQt5")
+    w.show()
+    sys.exit(app.exec_())
+
+
+if __name__ == '__main__':
+    pyqt5app()
+
+
 pattern = desktop_dir + "Screenshot*"
 # test_setup(desktop_dir, test_file_name)
 # file_move(desktop_dir, dst_dir, test_file_name)
@@ -70,5 +87,3 @@ for file in glob.iglob(pattern, recursive=True):
     else:
         os.remove(file)
         print("File deleted!")
-
-

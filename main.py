@@ -2,7 +2,8 @@
 
 import shutil
 import sys
-from PyQt5.QtWidgets import QApplication, QWidget, QLabel
+
+import tkinter as tk
 import os
 import time
 import glob
@@ -54,20 +55,23 @@ def test_setup(src_path, target_file):
     time.sleep(2)
 
 
-def pyqt5app():
-    app = QApplication(sys.argv)
-    w = QWidget()
-    b = QLabel(w)
-    b.setText("Hello World!")
-    w.setGeometry(500, 500, 1000, 500)
-    b.move(450, 240)
-    w.setWindowTitle("PyQt5")
-    w.show()
-    sys.exit(app.exec_())
+# Window and text setup
+root = tk.Tk()
+message = tk.Label(root, text="Hello, World!")
+message.pack()
+root.title("Screenshot Cleanup")
 
+# Window geometry setup
+window_width = 1200
+window_height = 800
+screen_width = root.winfo_screenwidth()
+screen_height = root.winfo_screenheight()
+centre_x = int(screen_width/2 - window_width/2)
+centre_y = int(screen_height/2 - window_height/2)
+root.geometry(f"{window_width}x{window_height}+{centre_x}+{centre_y}")
+root.resizable(False, False)
 
-if __name__ == '__main__':
-    pyqt5app()
+root.mainloop()
 
 
 pattern = desktop_dir + "Screenshot*"
